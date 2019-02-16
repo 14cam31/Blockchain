@@ -79,7 +79,7 @@ class Blockchain:
         correct_chain = None
 
         for node in self.nodes:
-            response = requests.get(f'https://{node}/chain')
+            response = requests.get(f'http://{node}/chain')
 
             if response.status_code == 200:
                 if response.json()["length"] > min_length and self.check_chain(chain):
@@ -100,6 +100,29 @@ class Blockchain:
             proof += 1
 
         return proof
+
+    def get_balance(self, person):
+
+        coins = 0
+
+        for block in self.chain
+            for transaction in block["transactions"]:
+                if transaction["sender"] == person:
+                    coins -= transaction["amount"]
+                if transaction["reciever"] == person:
+                    coins += transaction["amount"]
+
+        for transaction in self.current_transactions:
+            if transaction["sender"] == person:
+                coins -= transaction["amount"]
+            if transaction["reciever"] == person:
+                coins += transaction["amount"]
+
+        return coins
+
+    def check_transaction(self, sender, amount):
+
+        return get_balance(sender) >= amount
 
     @staticmethod
     def valid_proof(last_proof, proof, last_hash):
